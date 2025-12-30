@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة النخلة للخدمات الرقمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --saudi-green: #006C35;
+            --pure-white: #FFFFFF;
+            --gold-accent: #D4AF37;
+            --light-gray: #f4f4f4;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- شريط الإعلانات المتحرك --- */
+        .ticker-wrap {
+            width: 100%;
+            background: var(--gold-accent);
+            color: #fff;
+            padding: 10px 0;
+            overflow: hidden;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+            font-weight: bold;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- الهيدر والقائمة --- */
+        header {
+            background: var(--saudi-green);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo i { color: var(--gold-accent); font-size: 2rem; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold-accent); }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        /* --- قسم الترحيب --- */
+        .hero {
+            background: linear-gradient(rgba(0,108,53,0.8), rgba(0,108,53,0.8)), url('https://images.unsplash.com/photo-1586717791821-3f44a563cc4c?auto=format&fit=crop&q=80&w=1470') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .hero p { font-size: 1.2rem; max-width: 700px; }
+
+        /* --- البطاقات والأقسام --- */
+        .container { width: 90%; max-width: 1200px; margin: 50px auto; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--saudi-green);
+            font-size: 2rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--gold-accent);
+            display: block;
+            margin: 10px auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        .card:hover { transform: translateY(-10px); }
+        .card i { font-size: 3rem; color: var(--saudi-green); margin-bottom: 20px; }
+        .price { font-size: 1.8rem; font-weight: bold; color: var(--gold-accent); margin: 15px 0; }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--saudi-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .btn:hover { background: var(--gold-accent); transform: scale(1.05); }
+
+        /* --- قسم التقييمات --- */
+        .testimonials { background: #fff; padding: 50px 0; }
+        .testi-card {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-right: 5px solid var(--saudi-green);
+        }
+        .testi-user { display: flex; align-items: center; gap: 15px; margin-top: 10px; }
+        .testi-user img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; width: 100%; position: absolute; top: 70px; right: 0; background: var(--saudi-green); padding: 20px; }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            🌟 عروض حصرية: الحسابات البنكية بـ 1000 ريال فقط لفترة محدودة | 📱 الأرقام الوهمية متوفرة الآن لجميع التطبيقات | ✅ ضمان وتفعيل فوري
+        </div>
+    </div>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-palm-tree"></i>
+            النخلة للخدمات
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#accounts">حسابات بنكية</a></li>
+            <li><a href="#numbers">أرقام وهمية</a></li>
+            <li><a href="#reviews">تقييماتنا</a></li>
+            <li><a href="mailto:compny71@gmail.com">تواصل معنا</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>خدمات بنكية ورقمية موثوقة</h1>
+        <p>بلمسة سعودية أصيلة، نوفر لك حسابات بنكية حقيقية مؤقتة وأرقام تفعيل بأسعار منافسة وجودة لا تضاهى. "ثقة الثقة".</p>
+    </section>
+
+    <section class="container" id="accounts">
+        <h2 class="section-title">الحسابات البنكية الحقيقية (20 يوم)</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-landmark"></i>
+                <h3>حساب بنكي سعودي</h3>
+                <p>(إنماء، الأهلي، البلاد)</p>
+                <div class="price">1000 ريال</div>
+                <p>تفعيل فوري مع الكود الخاص</p>
+                <a href="mailto:compny71@gmail.com?subject=طلب حساب بنكي سعودي&body=مرحبا اريد حساب بنكي سعودي إنما أو اهلي أو البلاد" class="btn">احجز الآن</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-university"></i>
+                <h3>حساب بنكي مصري</h3>
+                <p>صالح لمدة 20 يوم</p>
+                <div class="price">1000 ريال</div>
+                <p>تفعيل فوري مع الكود الخاص</p>
+                <a href="mailto:compny71@gmail.com?subject=طلب حساب بنكي مصري&body=مرحبا اريد حساب بنكي مصري" class="btn">احجز الآن</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-building-columns"></i>
+                <h3>حساب بنكي يمني</h3>
+                <p>صالح لمدة 20 يوم</p>
+                <div class="price">1000 ريال</div>
+                <p>تفعيل فوري مع الكود الخاص</p>
+                <a href="mailto:compny71@gmail.com?subject=طلب حساب بنكي يمني&body=مرحبا اريد حساب بنكي يمني" class="btn">احجز الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="numbers" style="background: #fff; padding: 40px; border-radius: 20px;">
+        <h2 class="section-title">الأرقام السعودية الوهمية</h2>
+        <div class="grid">
+            <div class="card" style="border: 2px solid var(--gold-accent);">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>رقم سعودي وهمي</h3>
+                <p>شغال لجميع التطبيقات (واتساب، تليجرام، سناب)</p>
+                <div class="price">200 ريال</div>
+                <a href="mailto:compny71@gmail.com?subject=طلب رقم سعودي وهمي&body=مرحبا اريد رقم سعودي وهمي لتفعيل التطبيقات" class="btn">اطلب الرقم</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="reviews">
+        <h2 class="section-title">آراء عملائنا</h2>
+        <div class="grid">
+            <div class="testi-card">
+                <p>"بيض الله وجيهكم، طلبت حساب البلاد ووصلني الكود في اقل من ساعة. شغل مرتب وثقة."</p>
+                <div class="testi-user">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                    <div>
+                        <strong>أبو فهد</strong><br>
+                        <small>الرياض، السعودية</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>"يا جماعة بجد الموقع ده محترم جداً، اشتريت رقم وهمي واشتغل معايا في ثانية. تسلم ايديكم!"</p>
+                <div class="testi-user">
+                    <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="User">
+                    <div>
+                        <strong>محمد علي</strong><br>
+                        <small>القاهرة، مصر</small>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>"كنت متخوف في البداية بس فعلاً الخدمة سريعة والدعم الفني متجاوب جداً عبر الإيميل."</p>
+                <div class="testi-user">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User">
+                    <div>
+                        <strong>سارة اليماني</strong><br>
+                        <small>جدة، السعودية</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2024 منصة النخلة الرقمية</p>
+        <p>للتواصل: compny71@gmail.com</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // إغلاق القائمة عند الضغط على رابط (للجوال)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
